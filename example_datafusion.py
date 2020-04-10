@@ -20,7 +20,7 @@ Example Airflow DAG that shows how to use DataFusion.
 """
 
 from airflow import models
-from airflow.operators.bash import BashOperator
+from airflow.operators import bash_operator
 from airflow.providers.google.cloud.operators.datafusion import (
     CloudDataFusionCreateInstanceOperator, CloudDataFusionCreatePipelineOperator,
     CloudDataFusionDeleteInstanceOperator, CloudDataFusionDeletePipelineOperator,
@@ -210,7 +210,7 @@ with models.DAG(
     # [END howto_cloud_data_fusion_delete_instance_operator]
 
     # Add sleep before creating pipeline
-    sleep = BashOperator(
+    sleep = bash_operator.BashOperator(
         task_id="sleep",
         bash_command="sleep 60"
     )
